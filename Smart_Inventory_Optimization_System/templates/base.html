@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StockWise · Smart Inventory{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-icon">S</span><span>StockWise<small>INVENTORY INTELLIGENCE</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav>
+      <a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span>▦</span> Dashboard</a>
+      <a class="nav-link {% if request.endpoint == 'products_page' %}active{% endif %}" href="{{ url_for('products_page') }}"><span>▤</span> Products</a>
+      <div class="nav-label sub-label">DAA LAB</div>
+      <a class="nav-link {% if request.endpoint == 'algorithms_page' %}active{% endif %}" href="{{ url_for('algorithms_page') }}"><span>⌕</span> Algorithm Studio</a>
+      <a class="nav-link {% if request.endpoint == 'optimization_page' %}active{% endif %}" href="{{ url_for('optimization_page') }}"><span>◇</span> Optimization</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>DAA Project Mode</strong><small>5th semester · Python</small></div></div>
+  </aside>
+  <main class="main-content">
+    <header class="topbar"><div><span class="breadcrumb">Workspace</span><span class="crumb-sep">/</span><strong>{% block page_name %}Overview{% endblock %}</strong></div><div class="top-right"><span class="live-pill"><i></i> SYSTEM READY</span><div class="avatar">SW</div></div></header>
+    <section class="page-wrap">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <footer>StockWise · Smart Inventory Optimization System <span>Built to demonstrate Design &amp; Analysis of Algorithms</span></footer>
+    </section>
+  </main>
+</div>
+{% block scripts %}{% endblock %}
+</body></html>

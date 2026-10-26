@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Algorithm Studio · StockWise{% endblock %}{% block page_name %}Algorithm Studio{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">DAA WORKBENCH</div><h1>Algorithm <span>studio.</span></h1><p>Run searching and sorting algorithms on your live inventory data.</p></div><span class="tag">CUSTOM IMPLEMENTATIONS</span></div>
+<div class="two-panels">
+<div class="panel"><div class="panel-head"><div><h2>01 · Search comparison</h2><p>Find a product by name or SKU using two approaches.</p></div><span class="stat-icon blue">⌕</span></div>
+<div class="algorithm-note"><strong>Linear Search</strong><span>Checks items one by one · O(n) worst case</span></div><div class="algorithm-note"><strong>Binary Search</strong><span>Halves the search range · O(log n) worst case</span></div>
+<label class="field-label">Search by<select id="searchField"><option value="sku">SKU number</option><option value="name">Product name</option></select></label><label class="field-label">Product name or SKU<input id="searchTarget" value="BM001" placeholder="e.g. BM001 or Veg Burger"></label><button class="btn primary full-btn" onclick="runSearch()">Compare search algorithms →</button><div id="searchResults" class="results-area"><div class="placeholder">Search results will appear here.</div></div></div>
+<div class="panel"><div class="panel-head"><div><h2>02 · Sorting comparison</h2><p>Sort live products by a selected property.</p></div><span class="stat-icon purple">↕</span></div>
+<div class="algorithm-note"><strong>Merge Sort</strong><span>Divide and conquer · O(n log n)</span></div><div class="algorithm-note"><strong>Quick Sort</strong><span>Partitioning · average O(n log n)</span></div>
+<label class="field-label">Sort products by<select id="sortField"><option value="quantity">Stock quantity</option><option value="daily_demand">Daily demand</option><option value="price">Unit price</option><option value="name">Product name</option><option value="sku">SKU number</option></select></label><button class="btn primary full-btn" onclick="runSort()">Compare sorting algorithms →</button><div id="sortResults" class="results-area"><div class="placeholder">Sorting results will appear here.</div></div></div>
+</div>
+<div class="panel theory-panel"><div class="panel-head"><div><h2>Complexity quick reference</h2><p>Expected asymptotic running time</p></div></div><div class="table-wrap"><table><thead><tr><th>ALGORITHM</th><th>BEST CASE</th><th>AVERAGE CASE</th><th>WORST CASE</th><th>SPACE</th></tr></thead><tbody>
+<tr><td>Linear Search</td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>O(1)</td></tr><tr><td>Binary Search</td><td>O(1)</td><td>O(log n)</td><td>O(log n)</td><td>O(1) iterative</td></tr><tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr><tr><td>Quick Sort</td><td>O(n log n) typical</td><td>O(n log n)</td><td>O(n²) theoretical</td><td>O(n) here due to partitions</td></tr>
+</tbody></table></div><p class="small-note">Timing depends on machine, data, and implementation. Binary search requires sorted input; the search routine first sorts a copy of the inventory by the selected field.</p></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/algorithms.js') }}"></script>{% endblock %}
